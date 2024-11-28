@@ -15,4 +15,7 @@ module.exports = {
   moduleNameMapper: {
     "@app/(.*)": "<rootDir>/src/$1",
   },
+  collectCoverage: true,
+  coverageDirectory: "coverage",
+  coverageReporters: ["lcov", "text"],
 };
