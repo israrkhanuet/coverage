@@ -1,40 +1,14 @@
-name: 'coverage'
-
+name: Coverage report
 on:
-  pull_request:
-    branches:
-      - develop
-      - main
-
+    pull_request:
+        branches:
+            - master
 jobs:
-  coverage:
-    runs-on: ubuntu-latest
-
-    permissions:
-      checks: write   # Add this to allow annotations for failed tests
-      contents: read  # Default required permission for accessing the repository
-
-    steps:
-      # Step 1: Checkout repository
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      # Step 2: Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
-      # Step 3: Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # Step 4: Run tests and generate coverage
-      - name: Run tests
-        run: npm test -- --coverage
-
-      # Step 5: Generate and display Jest coverage report
-      - name: Jest Coverage Report
-        uses: ArtiomTr/jest-coverage-report-action@v2
-        with:
-          coverage-path: coverage/lcov-report
+    coverage:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: artiomtr/jest-coverage-report-action@v1.3
+              with:
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
+                  #   threshold: 80 # optional parameter
