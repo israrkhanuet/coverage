@@ -1,20 +1,35 @@
 name: "coverage"
+
 on:
   pull_request:
     branches:
       - develop
       - main
+
 jobs:
   coverage:
     runs-on: ubuntu-latest
+
     permissions:
-      checks: write
-      pull-requests: write
-      contents: read
+      checks: write # Allow the action to publish annotations
+      contents: read # Allow the action to read the repository's contents
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
           node-version: "14"
 
-      - uses: ArtiomTr/jest-coverage-report-action@v2
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test -- --coverage
+
+      - name: Jest Coverage Report
+        uses: ArtiomTr/jest-coverage-report-action@v2
+        with:
+          coverage-path: coverage/lcov-report
