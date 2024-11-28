@@ -26,7 +26,7 @@
 
     /* Emit */
     "sourceMap": true /* Create source map files for emitted JavaScript files. */,
-    "outDir": "./dist" /* Specify an output folder for all emitted files. */,
+    "outDir": "./" /* Specify an output folder for all emitted files. */,
     "preserveConstEnums": true /* Disable erasing `const enum` declarations in generated code. */,
 
     /* Interop Constraints */
